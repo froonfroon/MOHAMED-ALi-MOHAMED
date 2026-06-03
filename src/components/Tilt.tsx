@@ -1,4 +1,4 @@
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useState, useRef, type MouseEvent } from 'react';
 
 interface TiltProps {
   children: React.ReactNode;
