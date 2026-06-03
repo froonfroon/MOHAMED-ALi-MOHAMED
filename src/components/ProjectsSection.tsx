@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { FadeIn } from './FadeIn';
 import { LiveProjectButton } from './LiveProjectButton';
 import type { Translation, ProjectItem } from '../translations';
+import { Tilt } from './Tilt';
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -51,62 +52,62 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, totalCards, t
           top: `${top}px`,
           willChange: 'transform'
         }}
-        whileHover={{
-          borderColor: 'rgba(181, 1, 167, 0.45)',
-          boxShadow: '0 20px 40px rgba(181, 1, 167, 0.18)',
-        }}
-        transition={{ duration: 0.3 }}
-        className="sticky w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 flex flex-col gap-6 md:gap-8 shadow-2xl"
+        className="sticky w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
       >
-        {/* Top Row: Info & Button */}
-        <div className="flex flex-row justify-between items-center w-full flex-wrap gap-4 border-b border-[#D7E2EA]/15 pb-4 sm:pb-5">
-          <div className="flex items-center gap-4 sm:gap-6">
-            {/* Custom number style (gradient, same bold scale) */}
-            <span className="hero-heading font-black text-[clamp(2.5rem,8vw,100px)] leading-none select-none">
-              {project.number}
-            </span>
-            <div className="flex flex-col text-left rtl:text-right">
-              <span className="text-[#D7E2EA]/60 uppercase text-xs sm:text-sm tracking-wider font-light">
-                {project.category}
+        <Tilt
+          maxTilt={4}
+          className="w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA]/15 bg-[#0C0C0C]/90 p-4 sm:p-6 md:p-8 flex flex-col gap-6 md:gap-8 shadow-2xl backdrop-blur-md"
+        >
+          {/* Top Row: Info & Button */}
+          <div className="flex flex-row justify-between items-center w-full flex-wrap gap-4 border-b border-[#D7E2EA]/15 pb-4 sm:pb-5">
+            <div className="flex items-center gap-4 sm:gap-6">
+              {/* Custom number style (gradient, same bold scale) */}
+              <span className="hero-heading font-black text-[clamp(2.5rem,8vw,100px)] leading-none select-none">
+                {project.number}
               </span>
-              <h3 className="text-[#D7E2EA] font-semibold text-lg sm:text-2xl md:text-3.5xl uppercase tracking-wide">
-                {project.name}
-              </h3>
+              <div className="flex flex-col text-left rtl:text-right">
+                <span className="text-[#D7E2EA]/60 uppercase text-xs sm:text-sm tracking-wider font-light">
+                  {project.category}
+                </span>
+                <h3 className="text-[#D7E2EA] font-semibold text-lg sm:text-2xl md:text-3.5xl uppercase tracking-wide">
+                  {project.name}
+                </h3>
+              </div>
+            </div>
+            <LiveProjectButton label={t.liveProject} />
+          </div>
+
+          {/* Bottom Row: Two-Column Image Grid */}
+          <div className="flex flex-row gap-4 sm:gap-6 md:gap-8 w-full items-stretch flex-grow overflow-hidden pb-2">
+            {/* Column 1: 40% Width - Stacked Images */}
+            <div className="w-[40%] flex flex-col gap-3 sm:gap-4 md:gap-5 justify-between">
+              <img
+                src={project.col1Image1}
+                alt={`${project.name} A`}
+                className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-left-top"
+                style={{ height: 'clamp(130px, 16vw, 230px)' }}
+                loading="lazy"
+              />
+              <img
+                src={project.col1Image2}
+                alt={`${project.name} B`}
+                className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-right-bottom"
+                style={{ height: 'clamp(160px, 22vw, 340px)' }}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Column 2: 60% Width - Tall Image */}
+            <div className="w-[60%] flex">
+              <img
+                src={project.col2Image}
+                alt={`${project.name} C`}
+                className="w-full h-full min-h-[100px] object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-center"
+                loading="lazy"
+              />
             </div>
           </div>
-          <LiveProjectButton label={t.liveProject} />
-        </div>
-
-        {/* Bottom Row: Two-Column Image Grid */}
-        <div className="flex flex-row gap-4 sm:gap-6 md:gap-8 w-full items-stretch flex-grow overflow-hidden pb-2">
-          {/* Column 1: 40% Width - Stacked Images */}
-          <div className="w-[40%] flex flex-col gap-3 sm:gap-4 md:gap-5 justify-between">
-            <img
-              src={project.col1Image1}
-              alt={`${project.name} A`}
-              className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-left-top"
-              style={{ height: 'clamp(130px, 16vw, 230px)' }}
-              loading="lazy"
-            />
-            <img
-              src={project.col1Image2}
-              alt={`${project.name} B`}
-              className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-right-bottom"
-              style={{ height: 'clamp(160px, 22vw, 340px)' }}
-              loading="lazy"
-            />
-          </div>
-
-          {/* Column 2: 60% Width - Tall Image */}
-          <div className="w-[60%] flex">
-            <img
-              src={project.col2Image}
-              alt={`${project.name} C`}
-              className="w-full h-full min-h-[100px] object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px] object-center"
-              loading="lazy"
-            />
-          </div>
-        </div>
+        </Tilt>
       </motion.div>
     </div>
   );

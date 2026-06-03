@@ -49,7 +49,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t, lang, id = "about
   return (
     <section
       id={id}
-      className="relative min-h-screen w-full flex flex-col justify-center items-center px-5 sm:px-8 md:px-10 py-20 bg-darkBg overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col justify-center items-center px-5 sm:px-8 md:px-10 py-20 bg-transparent overflow-hidden"
     >
       {/* Decorative 3D Images */}
       {/* Top Left: Moon */}

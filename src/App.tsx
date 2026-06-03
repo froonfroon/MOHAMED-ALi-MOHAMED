@@ -8,6 +8,9 @@ import { ArrowUp } from 'lucide-react';
 import { FadeIn } from './components/FadeIn';
 import { translations } from './translations';
 import BackgroundStars from './components/BackgroundStars';
+import PricingSection from './components/PricingSection';
+import FAQSection from './components/FAQSection';
+import ChatbotWidget from './components/ChatbotWidget';
 
 function App() {
   // Default to Arabic ('ar') as requested by user, or support easy toggling
@@ -45,7 +48,7 @@ function App() {
         lang={lang}
         onToggleLang={toggleLanguage}
         onAboutClick={() => handleScrollTo('about')}
-        onPriceClick={() => handleScrollTo('services')}
+        onPriceClick={() => handleScrollTo('pricing')}
         onProjectsClick={() => handleScrollTo('projects')}
         onContactClick={() => handleScrollTo('contact')}
       />
@@ -60,11 +63,20 @@ function App() {
         id="about"
       />
 
-      {/* 4. Services Section (Price Target) */}
+      {/* 4. Services Section */}
       <ServicesSection t={t} id="services" />
 
-      {/* 5. Projects Section */}
+      {/* 5. Pricing Section (Price Target) */}
+      <PricingSection lang={lang} id="pricing" />
+
+      {/* 6. Projects Section */}
       <ProjectsSection t={t} id="projects" />
+
+      {/* 7. FAQ Section */}
+      <FAQSection lang={lang} id="faq" />
+
+      {/* 8. Floating Action Chatbot Widget */}
+      <ChatbotWidget lang={lang} />
 
       {/* 6. Footer (Contact Target) */}
       <footer

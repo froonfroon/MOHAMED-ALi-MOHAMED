@@ -1,0 +1,25 @@
+import fs from 'fs';
+import path from 'path';
+
+const srcFolder = 'C:/Users/pc/.gemini/antigravity-ide/brain/5cb2f7c7-a5a0-42e5-82eb-2f9d5a191ad5';
+const destFolder = './src/assets';
+
+const mapping = {
+  'media__1780445863117.png': 'sales_system_dashboard.png',
+  'media__1780445890375.png': 'veg_system_dashboard.png',
+  'media__1780445922923.png': 'veg_system_scale.png',
+  'media__1780445974855.png': 'plastic_pro_dashboard.png',
+  'sharkgroup_site_1780446096938.png': 'sharkgroup_site.png'
+};
+
+Object.entries(mapping).forEach(([srcFile, destFile]) => {
+  const srcPath = path.join(srcFolder, srcFile);
+  const destPath = path.join(destFolder, destFile);
+
+  if (fs.existsSync(srcPath)) {
+    fs.copyFileSync(srcPath, destPath);
+    console.log(`Copied ${srcFile} to ${destPath}`);
+  } else {
+    console.error(`Source file not found: ${srcPath}`);
+  }
+});
